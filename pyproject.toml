@@ -1,7 +1,19 @@
 [project]
 name = "globant-case"
 version = "0.1.0"
-description = "Add your description here"
+description = "Globant Case"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "psycopg2-binary",
+    "requests",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest",
+    "ipykernel",
+]

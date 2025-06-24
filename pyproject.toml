@@ -7,8 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi",
     "uvicorn[standard]",
-    "psycopg2-binary",
     "requests",
+    "sqlalchemy>=2.0.41",
+    "cloud-sql-python-connector[pg8000]>=1.18.2",
 ]
 
 [project.optional-dependencies]
@@ -17,3 +18,6 @@ dev = [
     "pytest",
     "ipykernel",
 ]
+
+[tool.setuptools.packages.find]
+where = ["src"]

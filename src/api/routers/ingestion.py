@@ -1,6 +1,7 @@
 from typing import List, Dict, Any
 from fastapi import APIRouter, HTTPException, status
-
+import traceback
+from sqlalchemy import insert
 from src.api.connector import pool
 from src.api import models
 from src.api import schemas
@@ -32,6 +33,7 @@ def batch_insert(table_name: str, payload: List[Dict[str, Any]]) -> Dict[str, st
     Returns:
         A dictionary with a message indicating the number of rows inserted.
     """
+    
     # Validate table name
     if table_name not in TABLES:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Table '{table_name}' not found.")
@@ -47,13 +49,13 @@ def batch_insert(table_name: str, payload: List[Dict[str, Any]]) -> Dict[str, st
     validated_rows = [model.model_validate(row) for row in payload]
     rows_to_insert = [row.model_dump() for row in validated_rows]
 
+
     # Insert rows
     try:
-        with pool.connect() as conn:
-            transaction = conn.begin()
-            conn.execute(table.insert(), rows_to_insert)
-            transaction.commit()
+        with pool.begin() as conn:
+            conn.execute(insert(table).values(rows_to_insert))
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"An error occurred during database insertion: {e}"
         )

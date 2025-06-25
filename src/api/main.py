@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import ingestion
+from .routers import ingestion, reports
 
 app = FastAPI(
     title="Globant Data Engineering Challenge API",
@@ -8,6 +8,7 @@ app = FastAPI(
 )
 
 app.include_router(ingestion.router)
+app.include_router(reports.router)
 
 
 @app.get("/", tags=["Status"])

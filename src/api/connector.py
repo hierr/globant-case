@@ -21,7 +21,6 @@ pool = sqlalchemy.create_engine(
         password=db_pass,
         db=db_name,
         ip_type=IPTypes.PRIVATE,
-        future=True,
     ),
 )
 

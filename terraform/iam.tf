@@ -69,3 +69,13 @@ resource "google_project_iam_member" "gbc-build-iam-user" {
     null_resource.api_services_gate
   ]
 }
+
+resource "google_project_iam_member" "gbc-build-logs-writer" {
+  project = var.gcp_project_id
+  role    = "roles/logging.logWriter"
+  member  = "serviceAccount:${google_service_account.gbc-build-sa.email}"
+  depends_on = [
+    google_service_account.gbc-build-sa,
+    null_resource.api_services_gate
+  ]
+}

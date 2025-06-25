@@ -22,6 +22,11 @@ resource "google_cloud_run_v2_service" "gbc-api-service" {
 
   template {
     service_account = google_service_account.gbc-run-sa.email
+    
+    vpc_access {
+      connector = google_vpc_access_connector.gbc-vpc-connector.name
+      egress    = "ALL_TRAFFIC"
+    }
 
     # Container config
     containers {

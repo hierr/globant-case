@@ -25,3 +25,12 @@ resource "google_service_networking_connection" "gbc-vpc-connection" {
   reserved_peering_ranges = [google_compute_global_address.gbc-private-ip-address.name]
   depends_on = [null_resource.api_services_gate]
 }
+
+# VPC Access Connector
+resource "google_vpc_access_connector" "gbc-vpc-connector" {
+  name          = "gbc-vpc-connector"
+  region        = var.gcp_region
+  network       = data.google_compute_network.gbc-default-network.self_link
+  ip_cidr_range = "10.8.0.0/28"
+  depends_on = [null_resource.api_services_gate]
+}

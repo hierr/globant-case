@@ -11,6 +11,7 @@ locals {
     "cloudresourcemanager.googleapis.com", # Cloud Resource Manager
     "servicenetworking.googleapis.com",   # Service Networking
     "compute.googleapis.com",             # Compute Engine
+    "vpcaccess.googleapis.com",           # VPC Access
   ])
 }
 

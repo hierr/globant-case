@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "gbc-postgres-instance" {
   settings {
     tier = "db-g1-small"
     ip_configuration {
-      ipv4_enabled    = false
+      ipv4_enabled    = true
       private_network = data.google_compute_network.gbc-default-network.self_link
     }
   }

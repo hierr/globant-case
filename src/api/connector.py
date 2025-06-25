@@ -20,9 +20,12 @@ connector = Connector()
 #         password=db_pass,
 #         db=db_name,
 #         ip_type=IPTypes.PRIVATE,
+#         future=True,
 #     ),
 # )
 
 pool = sqlalchemy.create_engine(
-    f"postgresql+pg8000://{db_user}:{db_pass}@localhost:5432/{db_name}"
+    f"postgresql+pg8000://{db_user}:{db_pass}@localhost:5432/{db_name}",
+    future=True,
+    echo=False,
 )

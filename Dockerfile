@@ -20,7 +20,5 @@ ENV PYTHONUNBUFFERED=1
 COPY --from=builder /app/.venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 COPY --chown=appuser:appuser ./src /app/src
-EXPOSE 8000
 
-# We use 0.0.0.0 to bind to all network interfaces inside the container
-CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD uvicorn src.api.main:app --host 0.0.0.0 --port $PORT

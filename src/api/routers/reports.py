@@ -8,8 +8,7 @@ router = APIRouter(prefix="/reports", tags=["Reports"])
 @router.get("/hires_by_quarter_2021")
 def get_hires_by_quarter():
     """
-    Returns the number of employees hired for each job and department in 2021,
-    divided by quarter. The table is ordered alphabetically by department and job.
+    Returns the number of employees hired for each job and department in 2021 divided by quarter
     """
     sql_query = text("""
         SELECT
@@ -40,8 +39,7 @@ def get_hires_by_quarter():
 @router.get("/departments_hiring_above_average_2021")
 def get_departments_above_average():
     """
-    Lists departments that hired more employees than the average for all
-    departments in 2021, ordered by the number of hires.
+    Lists departments that hired more employees than the average for all departments in 2021
     """
     sql_query = text("""
         WITH department_hires AS (
